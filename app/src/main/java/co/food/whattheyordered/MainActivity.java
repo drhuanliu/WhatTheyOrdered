@@ -30,6 +30,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class MainActivity extends Activity {
@@ -46,6 +47,8 @@ public class MainActivity extends Activity {
     private Context mContext;
     ListView dishlistview;
     DishAdapter dishAdapter;
+
+    int mBaseNumber;
 
 //    private TextView orderId;
 //    private TextView lineItemCount;
@@ -71,9 +74,7 @@ public class MainActivity extends Activity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long arg3) {
-                Intent intent = new Intent(getBaseContext(), TableActivity.class);
-                intent.putExtra("order", MainActivity.mOrders.get(position));
-                startActivity(intent);
+                updateOrder(MainActivity.mOrders.get(position));
             }
         });
 
@@ -90,13 +91,15 @@ public class MainActivity extends Activity {
         });
 
 
-        DishAdapter dishAdapter = new DishAdapter(this, mDishes);
+        dishAdapter = new DishAdapter(this, mDishes);
         dishlistview.setAdapter(dishAdapter);
+        int i=0;
 
     }
 
 
     void updateOrder(Order order) {
+        mDishes.clear();
         try {
             JSONObject obj = (JSONObject) order.getJSONObject().get("lineItems");
             JSONArray obj1 = (JSONArray) obj.get("elements");
@@ -108,10 +111,21 @@ public class MainActivity extends Activity {
             }
 
             dishAdapter.notifyDataSetChanged();
+
+            Random r = new Random();
+            mBaseNumber = (r.nextInt(6));
         }
         catch (Exception e) {
             e.printStackTrace();
         }
+
+        dishlistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,long arg3) {
+                Toast.makeText(mContext, "Ordered " + mDishes.get(position), Toast.LENGTH_LONG).show();
+            }
+        });
 
     }
 
@@ -188,7 +202,7 @@ public class MainActivity extends Activity {
 
 
 
-            String mDrawableName = "dish" + position;
+            String mDrawableName = "dish" + ((mBaseNumber+position)%6);
             int resID = getResources().getIdentifier(mDrawableName , "drawable", getPackageName());
             img.setImageResource(resID);
 //            Bitmap bmImg = BitmapFactory.decodeFile("file:///android_res/drawable/dish" + position + ".jpeg");
@@ -196,6 +210,11 @@ public class MainActivity extends Activity {
 
             return convertView;
         }
+    }
+
+    public void ordered(View v) {
+        Toast.makeText(mContext, "Just ordered one for you", Toast.LENGTH_LONG).show();
+
     }
 
     public class OrderAdapter extends ArrayAdapter<Order> {

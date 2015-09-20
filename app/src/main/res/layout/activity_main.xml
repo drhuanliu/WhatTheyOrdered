@@ -1,76 +1,87 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:orientation="horizontal"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="0dp"
+    tools:context=".MainActivity">
+
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="126dp"
+        android:id="@+id/imageView"
+        android:src="@drawable/elephantbar"
+        />
+
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_weight="2"
-        android:layout_height="match_parent"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:id="@+id/imageView"
-                android:src="@drawable/elephantbar"
-            />
+
+        <LinearLayout
+            android:layout_width="162dp"
+            android:layout_height="match_parent"
+            android:background="#3e4860"
+            android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="Select Table"
+                    android:textColor="#a5acbe"
+                    android:layout_marginTop="10pt"
+                    android:layout_marginBottom="10pt"
+                    android:textSize="11pt"
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/textView" />
+
+
+                <ListView xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/tablelist"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </ListView>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_height="match_parent"
+            android:layout_width="900dp"
+            android:orientation="vertical">
+
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
+                android:padding="10dp"
+                android:textSize="20sp"
                 android:gravity="center_horizontal"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="See what other tables are ordering"
+                android:text="What is ordered"
+                android:background="#d8d8d8"
                 android:layout_gravity="center_horizontal"
-                android:id="@+id/textView" />
+                android:id="@+id/tablename" />
 
 
             <ListView xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/tablelist"
+                android:id="@+id/dishlist"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:nestedScrollingEnabled="true"
+                android:background="#ffffff"
+                android:layout_weight="10"
+                android:layout_height="0dp">
 
             </ListView>
-    </LinearLayout>
 
 
-    <LinearLayout
-        android:layout_height="match_parent"
-        android:layout_width="0dp"
-        android:layout_weight="3"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:orientation="vertical"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
 
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:textSize="40sp"
-            android:gravity="center_horizontal"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="What is ordered"
-            android:layout_gravity="center_horizontal"
-            android:id="@+id/tablename" />
-
-
-        <ListView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/dishlist"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </ListView>
-
-
+        </LinearLayout>
 
     </LinearLayout>
 
